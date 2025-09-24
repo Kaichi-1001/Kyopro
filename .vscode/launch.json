@@ -1,0 +1,45 @@
+    // IntelliSense を使用して利用可能な属性を学べます。
+    // 既存の属性の説明をホバーして表示します。
+    // 詳細情報は次を確認してください: https://go.microsoft.com/fwlink/?linkid=830387
+{
+  "version": "2.0.0",
+  "configurations": [
+    {
+      "name": "🛠️ gdb: デバッグ実行",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${fileDirname}/${fileBasenameNoExtension}.out",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${fileDirname}",
+      "environment": [
+        {
+          "name": "UBSAN_OPTIONS",
+          "value": "abort_on_error=1:print_stacktrace=1"
+        },
+        {
+          "name": "ASAN_OPTIONS",
+          "value": "abort_on_error=1:detect_leaks=0"
+        }
+      ],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "miDebuggerPath": "/usr/bin/gdb",
+      "setupCommands": [
+        {
+          "description": "gdb の再フォーマットを有効にする",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        },
+        {
+          "description": "逆アセンブリ フレーバーを Intel に設定",
+          "text": "-gdb-set disassembly-flavor intel",
+          "ignoreFailures": true
+        }
+      ],
+      "preLaunchTask": "debug build",  // tasks.json 側と連動
+      "console": "integratedTerminal", //入力可能なデバッグターミナル
+      "internalConsoleOptions": "neverOpen"
+    }
+  ]
+}
