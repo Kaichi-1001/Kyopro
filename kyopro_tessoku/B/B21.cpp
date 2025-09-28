@@ -20,7 +20,7 @@ int main() {
 
     // 動的計画法
     else {
-        for(int len = 2; len <= n-1; len++) { //lenはr-lの値
+        for(int len = 2; len <= n-1; len++) { //lenはr-lの値（s中の参照する長さ）<- この問題では長さを増やしていく処理順序にすることが大切
             for(int l = 1; l <= n-len; l++) {
                 int r = l + len;
                 if(s[l-1] == s[r-1]) dp[l][r] = max({dp[l+1][r-1] + 2, dp[l+1][r], dp[l][r-1]});
