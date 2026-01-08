@@ -14,6 +14,20 @@ long long pow_10(int a)
     return res;
 }
 
+// 1からaまでの和を返す関数
+long long SUM(int a)
+{
+    long long res = 0;
+    if (a > 0) {
+        for (int i = 1; i <= a; i++)
+        {
+            res += i;
+        }
+        return res;
+    }
+    return 0;
+}
+
 int main()
 {
     // 入力
@@ -23,10 +37,15 @@ int main()
     long long sum = 0;
     for (int i = 1; i <= 15; i++)
     {
-        sum += (n / 10) * 45 * pow_10(i - 1); // 1から9の和は45
-        int r = n % 10;
-        sum += r * (r + 1) / 2 * pow_10(i - 1); // 1~rの和
-        n /= 10;
+        // 周回の回数は、上の桁の数で決まる
+        sum += (n / pow_10(i)) * 45 * pow_10(i - 1);
+        
+        // 周回から溢れた数は、下の桁の数で決まる
+        long long r = (n / pow_10(i - 1)) % 10;
+        sum += SUM(r-1) * pow_10(i - 1);
+
+        long long s = n - (n / pow_10(i-1) * pow_10(i-1));
+        sum += r * (s + 1);
     }
 
     // 出力
