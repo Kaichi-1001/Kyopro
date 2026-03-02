@@ -25,6 +25,7 @@ bool dfs(int pos)
     }
     // 戻るときはpathの末尾を削除する
     path.pop_back();
+    visited[pos] = false;
     return false;
 }
 int main()
